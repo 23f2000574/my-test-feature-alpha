@@ -1,51 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Button Interaction Demo</title>
+    <title>Button Interaction App</title>
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f2f5;
+        body { 
+            font-family: sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            background-color: #f4f4f9; 
         }
-        #clickButton {
-            padding: 15px 30px;
-            font-size: 1.3em;
-            cursor: pointer;
-            border: none;
-            border-radius: 10px;
-            background-color: #4CAF50;
-            color: white;
+        .button-container { 
+            display: flex; 
+            gap: 15px; 
+            padding: 20px; 
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn { 
+            padding: 12px 25px; 
+            font-size: 18px; 
             font-weight: bold;
-            transition: background-color 0.3s, transform 0.1s;
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+            cursor: pointer; 
+            border: none; 
+            border-radius: 6px; 
+            transition: background-color 0.3s, transform 0.1s; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        #clickButton:hover {
-            background-color: #45a049;
+        .btn:active {
+            transform: translateY(1px);
         }
-        #clickButton:active {
-            transform: scale(0.98);
+        #mainButton { 
+            background-color: #007bff; 
+            color: white; 
+        }
+        #mainButton:hover { 
+            background-color: #0056b3; 
+        }
+        #resetButton { 
+            background-color: #dc3545; 
+            color: white; 
+        }
+        #resetButton:hover { 
+            background-color: #c82333; 
         }
     </style>
 </head>
 <body>
-    <button id="clickButton">Click Me</button>
+    <div class="button-container">
+        <button id="mainButton" class="btn">Click Me</button>
+        <button id="resetButton" class="btn">Reset</button>
+    </div>
 
     <script>
-        /**
-         * Attaches an event listener to the button to change its text content
-         * upon being clicked.
-         */
-        document.getElementById('clickButton').addEventListener('click', function() {
-            this.textContent = 'Clicked!';
-            // Optional: Change styling to indicate the action is complete
-            this.style.backgroundColor = '#2196F3';
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainButton = document.getElementById('mainButton');
+            const resetButton = document.getElementById('resetButton');
+            
+            // Store the initial state
+            const originalText = 'Click Me';
+            const clickedText = 'Clicked!';
+
+            // 1. Functionality for the main button
+            mainButton.addEventListener('click', () => {
+                if (mainButton.textContent === originalText) {
+                    mainButton.textContent = clickedText;
+                }
+                // If it's already clicked, we could allow it to stay 'Clicked!' or cycle.
+                // For simplicity, we just set it to 'Clicked!'.
+            });
+
+            // 2. Functionality for the reset button
+            resetButton.addEventListener('click', () => {
+                mainButton.textContent = originalText;
+            });
         });
     </script>
 </body>
